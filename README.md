@@ -1,0 +1,2 @@
+# swagger
+Hosting API definitions
