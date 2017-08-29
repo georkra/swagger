@@ -1,0 +1,83 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "0.1.0",
+    "title" : "Person RESTful API"
+  },
+  "paths" : {
+    "/persons" : {
+      "get" : {
+        "description" : "Gets `Person` objects.\nOptional query param of **size** determines\nnumber of returned records.\nOptional query param of **query-string** may be used to search for specific persons.\n",
+        "operationId" : "searchPersons",
+        "tags" : [ "Person", "searchPersons()" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of elements to be returned.If missing, all recs are returned.Must be a positive integer.",
+          "required" : false,
+          "type" : "number",
+          "format" : "int32"
+        }, {
+          "name" : "query-string",
+          "in" : "query",
+          "description" : "A query string",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "schema" : {
+              "title" : "ArrayOfPersons",
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Person"
+              }
+            }
+          },
+          "404" : {
+            "description" : "No records found"
+          },
+          "400" : {
+            "description" : "Invalid size supplied. Must be a positive integer."
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Person" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "username" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "userStatus" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "User Status"
+        }
+      }
+    }
+  }
+}
